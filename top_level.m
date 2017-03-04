@@ -22,4 +22,8 @@ vs = viewSet;
 [f,p] = extractFeatureSet(images,'SURF','sparse',cameraParams);
 save('step2.mat','f','p');
 
-%%
+%% Step 3
+% Extract matches from all image pairs: 1 to 2, 2 to 3,..., end to 1
+% Save these matches to a cell arrray.
+m = extractMatches(f,'sparse');
+save('step3.mat','m');
