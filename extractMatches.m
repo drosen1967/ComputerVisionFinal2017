@@ -12,13 +12,13 @@ function [ m ] = extractMatches( features,  quality )
 %subset, dense
 
 if strcmp(quality,'sparse')
-    matThresh = 5;
+    matThresh = 10;
     maxR = .5;
     for i = 1:size(features,2)-1
         m{i} = matchFeatures(features{i},features{i+1}, 'MatchThreshold',matThresh,'MaxRatio',maxR);
         fprintf('%3.2f percent complete, %10i matches found\n',[i/size(features,2)*100,length(m{i})]);
     end
-    m{size(features,2)} = extractFeatures(features{size(features,2)},features{1}, 'MatchThreshold',matThresh,'MaxRatio',maxR);
+    m{size(features,2)} = matchFeatures(features{size(features,2)},features{1}, 'MatchThreshold',matThresh,'MaxRatio',maxR);
 else
     matThresh = 10;
     maxR = .8;
@@ -26,7 +26,7 @@ else
         m{i} = matchFeatures(features{i},features{i+1}, 'MatchThreshold',matThresh,'MaxRatio',maxR);
         fprintf('%3.2f percent complete, %10i matches found\n',[i/size(features,2)*100,length(m{i})]);
     end
-    m{size(features,2)} = extractFeatures(features{size(features,2)},features{1}, 'MatchThreshold',matThresh,'MaxRatio',maxR);
+    m{size(features,2)} = matchFeatures(features{size(features,2)},features{1}, 'MatchThreshold',matThresh,'MaxRatio',maxR);
 end
 
 end
